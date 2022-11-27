@@ -30,7 +30,7 @@ docker run -d \
 
 *默认丢弃延迟超出8-200ms上下限的结果，丢弃速度低于5mb/s的结果，不支持ipv6
 
-*需要避免docker走代理，防止出错
+*需要避免docker走代理，防止出错,一般代理软件都有不代理ip段的设置，建议设置docker bridge的ip段，或者可以使用docker network create --subnet=172.18.0.0 /16 mynetwork ，在启动容器时添加--net mynetwork --ip 172.18.0.2 \的命令。达到docker容器固定ip,再设置172.18.0.2不走代理
 
 # 声明
 保证自用，不保证其他人可用，有bug请PR不要BB
