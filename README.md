@@ -2,7 +2,7 @@
 
 使用XIU2/CloudflareSpeedTest项目，自动检测cf的本地优选ip，并通过ddns修改域名的dns解析记录。
 
-只支持在amd64和arm64(armv8)平台部署，其他平台不用
+只支持在amd64和arm64(armv8)平台部署，其他平台不用，cloudflare官方api不支持freenom域名，eu.org可用
 
 需要先申请cloudflare的token，自行生成，建议先为需要解析的二级域名随便设置一个解析，如sub.example.com:120.120.120.120, 避免token无法访问api的问题，还是不行就生成一个有全部权限的token
 
