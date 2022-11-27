@@ -4,7 +4,7 @@ zone=$1
 dnsrecord=$2
 cloudflare_auth_key=$3
 use_proxy=false
-
+rm -f /result.csv
 /CloudflareST -tl 200 -tll 8 -sl 5 -p 1 -f ip.txt >/dev/null 2>&1
 current_ip=$(grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}" /result.csv| head -n 1)
 echo "Current IP is $current_ip"
@@ -36,4 +36,5 @@ else
           -H "Content-Type: application/json" \
           --data "{\"type\":\"A\",\"name\":\"$dnsrecord\",\"content\":\"$current_ip\",\"ttl\":1,\"proxied\":$use_proxy}" | jq
 fi
+rm /result.csv
 exit 0
