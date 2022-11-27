@@ -10,12 +10,19 @@
 # 使用方法
 
 docker run -d \\
+
   --name="DDCF" \\
+  
   -e ZONE="example.com" \\
+  
   -e DNSRECORD="sub.example.com" \\
+  
   -e CLOUDFLARE_AUTH_KEY="dhsaihdiuah" \\
+  
   -e HOURS="12" \\
+  
   --restart unless-stopped \\
+  
   ghcr.io/styxiik/ddcf:main
   
 *ZONE是cloudflare托管域名的主域名
