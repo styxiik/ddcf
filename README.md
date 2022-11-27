@@ -9,26 +9,23 @@
 
 # 使用方法
 
-docker run -d \\
-
-  --name="DDCF" \\
-  
-  -e ZONE="example.com" \\
-  
-  -e DNSRECORD="sub.example.com" \\
-  
-  -e CLOUDFLARE_AUTH_KEY="dhsaihdiuah" \\
-  
-  -e HOURS="12" \\
-  
-  --restart unless-stopped \\
-  
+```
+docker run -d \
+  --name="DDCF" \
+  -e ZONE="example.com" \
+  -e DNSRECORD="sub.example.com" \
+  -e CLOUDFLARE_AUTH_KEY="dhsaihdiuah" \
+  -e HOURS="12" \
+  --restart unless-stopped \
   ghcr.io/styxiik/ddcf:main
-  
+```
+
+*自行替换以下参数
+
 *ZONE是cloudflare托管域名的主域名
 
-
 *DNSRECORD是需要修改dns的二级域名
+
 *CLOUDFLARE_AUTH_KEY，cloudflare token
 
 *自动更新ip时间间隔,单位h
@@ -37,7 +34,23 @@ docker run -d \\
 
 *默认丢弃延迟超出8-200ms上下限的结果，丢弃速度低于5mb/s的结果，不支持ipv6
 
-*需要避免docker走代理，防止出错,一般代理软件都有不代理ip段的设置，建议设置docker bridge的ip段，或者可以使用docker network create --subnet=172.18.0.0 /16 mynetwork ，在启动容器时添加--net mynetwork --ip 172.18.0.2 \的命令。达到docker容器固定ip,再设置172.18.0.2不走代理
+*需要避免docker走代理，防止出错,一般代理软件都有不代理ip段的设置
+
+*建议docker bridge的ip段不走代理，或者可以在部署前创建专属网段
+
+```
+docker network create --subnet=172.18.0.0 /16 mynetwork
+```
+
+
+
+在启动容器时添加以下参数
+
+```
+--net mynetwork --ip 172.18.0.2 \
+```
+
+达到docker容器为固定ip,再设置172.18.0.2不走代理
 
 # 声明
 保证自用，不保证其他人可用，有bug请PR不要BB
