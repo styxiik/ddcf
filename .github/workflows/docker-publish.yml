@@ -9,12 +9,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 0 1 * *'
-  push:
-    branches: [ "main" ]
-    # Publish semver tags as releases.
-    tags: [ 'latest' ]
-  pull_request:
-    branches: [ "main" ]
 
 env:
   # Use docker.io for Docker Hub if empty
@@ -69,7 +63,8 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
+          tages: ghcr.io/styxiik/ddcf:latest
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          # tags: ${{ steps.meta.outputs.tags }}

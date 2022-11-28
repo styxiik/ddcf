@@ -18,7 +18,7 @@ docker run -d \
   -e CLOUDFLARE_AUTH_KEY="dhsaihdiuah" \
   -e HOURS="12" \
   --restart unless-stopped \
-  ghcr.io/styxiik/ddcf:main
+  ghcr.io/styxiik/ddcf:latest
 ```
 
 *自行替换以下参数
