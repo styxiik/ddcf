@@ -6,7 +6,7 @@ cloudflare_auth_key=$3
 use_proxy=false
 
 rm -f /result.csv && \
-/CloudflareST -tl 200 -tll 8 -sl 5 -p 1 -f ip.txt >/dev/null 2>&1 && \
+/CloudflareST -tl 200 -tll 8 -sl 5 -p 1 -f ip.txt && \
 current_ip=$(grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}" /result.csv| head -n 1) && \
 echo "Current IP is $current_ip" && \
 
