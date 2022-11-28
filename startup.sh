@@ -6,6 +6,6 @@ HOURS=$4
 echo > /run.log
 echo > /etc/crontabs/root
 rm -f /result.csv
-echo "30 */$HOURS * * * nohup /bin/bash /run.sh $ZONE $DNSRECORD $CLOUDFLARE_AUTH_KEY > /run.log" >> /etc/crontabs/root
+echo "30 */$HOURS * * * /bin/bash /run.sh $ZONE $DNSRECORD $CLOUDFLARE_AUTH_KEY > /run.log 2>&1" >> /etc/crontabs/root
 /bin/bash /run.sh $ZONE $DNSRECORD $CLOUDFLARE_AUTH_KEY
 tail -f /run.log
