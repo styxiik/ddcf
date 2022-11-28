@@ -1,10 +1,12 @@
 FROM alpine:latest
 COPY *.sh /
+ENV TZ Asia/Shanghai
 ENV ZONE $ZONE
 ENV DNSRECORD $DNSRECORD
 ENV CLOUDFLARE_AUTH_KEY $CLOUDFLARE_AUTH_KEY
 ENV HOURS $HOURS
-RUN apk add --no-cache wget jq curl tar bash gzip bind-tools \
+RUN apk add --no-cache tzdata wget jq curl tar bash gzip bind-tools \
+ && cp /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone && apk del tzdata \
  && rm -rf /var/cache/apk/* \
  && touch run.log && chmod 777 run.log \
  && newarch=$(arch | sed s/aarch64/arm64/ | sed s/armv8/arm64/ | sed s/x86_64/amd64/) \

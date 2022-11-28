@@ -1,13 +1,12 @@
 # ddcf
 
-!!BUG 自动定时程序有问题，有空处理，暂时手动重启容器更新ip
-
 使用XIU2/CloudflareSpeedTest项目，自动检测cf的本地优选ip，并通过ddns修改域名的dns解析记录。
 
 只支持在amd64和arm64(armv8)平台部署，其他平台不用，cloudflare官方api不支持freenom域名，eu.org可用
 
 需要先申请cloudflare的token，自行生成，建议先为需要解析的二级域名随便设置一个解析，如sub.example.com:120.120.120.120, 避免token无法访问api的问题，还是不行就生成一个有全部权限的token
 
+有时日志出现筛选到目标ip，但无法更新ip的情况，这是因为使用该优选ip也无法访问cloudflare api,说明无可用ip
 
 # 使用方法
 
@@ -30,7 +29,7 @@ docker run -d \
 
 *CLOUDFLARE_AUTH_KEY，cloudflare token
 
-*自动更新ip时间间隔,单位h
+*HOURS,自动更新ip时间间隔,单位h
 
 *以上参数都属必填项
 
