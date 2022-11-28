@@ -1,5 +1,7 @@
 # ddcf
 
+!!BUG 自动定时程序有问题，有空处理，暂时手动重启容器更新ip
+
 使用XIU2/CloudflareSpeedTest项目，自动检测cf的本地优选ip，并通过ddns修改域名的dns解析记录。
 
 只支持在amd64和arm64(armv8)平台部署，其他平台不用，cloudflare官方api不支持freenom域名，eu.org可用
