@@ -63,7 +63,7 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
-          tages: ghcr.io/styxiik/ddcf:latest
+          tags: ghcr.io/styxiik/ddcf:latest
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
