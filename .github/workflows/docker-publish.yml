@@ -68,3 +68,8 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           # tags: ${{ steps.meta.outputs.tags }}
+      - name: delete-untagged-action
+        uses: camargo/delete-untagged-action@v1
+        with:
+          github-token: ${{ secrets.REPO_TOKEN }}
+          personal-account: true
