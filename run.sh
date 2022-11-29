@@ -11,7 +11,7 @@ rm -f /root/result.csv && \
 /root/CloudflareST -tl 200 -tll 8 -sl 5 -p 1 -f /root/ip.txt && \
 target_ip=`grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}" /root/result.csv| head -n 1` && \
 
-if [ "${target_ip} = "" "];then
+if [ ! -n "$target_ip" ]; then
    echo "fail to found a target ip"
    exit
 else
