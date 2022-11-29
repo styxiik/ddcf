@@ -69,6 +69,14 @@ jobs:
           cache-to: type=gha,mode=max
           # tags: ${{ steps.meta.outputs.tags }}
           
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@v4
+        with:
+          name: styxiik/ddcf
+          username: styxiik
+          password: ${{ secrets.DOCKER_TOKEN }}
+          platforms: linux/amd64,linux/arm64
+          
       - name: delete-untagged-action
         uses: camargo/delete-untagged-action@v1
         with:
