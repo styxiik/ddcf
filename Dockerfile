@@ -15,4 +15,4 @@ RUN apk add --no-cache wget jq grep curl tar gzip bind-tools \
  && gzip -d CloudflareST*.tar.gz && tar -vxf CloudflareST*.tar && rm CloudflareST*.tar \
  && chmod +x CloudflareST run.sh startup.sh
 
-CMD startup.sh $TOKEN $DOMAIN_ID $SUB_DOMAIN $MAIN_DOMAIN $HOURS
+CMD /root/startup.sh $TOKEN $DOMAIN_ID $SUB_DOMAIN $MAIN_DOMAIN $HOURS
