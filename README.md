@@ -1,33 +1,34 @@
 # ddcf
 
-使用XIU2/CloudflareSpeedTest项目，自动检测cf的本地优选ip，并通过ddns修改域名的dns解析记录。
+使用XIU2/CloudflareSpeedTest项目，自动检测cf的本地优选ip，并通过dnspod大陆版ddns修改域名的dns解析记录。
 
-只支持在amd64和arm64(armv8)平台部署，其他平台不用，cloudflare官方api不支持freenom域名，eu.org可用
+只支持在amd64和arm64(armv8)平台部署，其他平台不用，支持eu.org主域名
 
-需要先申请cloudflare的token，自行生成，建议先为需要解析的二级域名随便设置一个解析，如sub.example.com:120.120.120.120, 避免token无法访问api的问题，还是不行就生成一个有全部权限的token
+需要先申请dnspod的token，自行生成，先为需要解析的二级域名随便设置一个解析，如sub.example.com:120.120.120.12
 
-有时日志出现筛选到目标ip，但无法更新ip的情况，这是因为使用该优选ip也无法访问cloudflare api,说明无可用ip
+由于api.cloudflare.com在大陆被屏蔽域名，且该docker需要运行在无代理环境下，所以切换为dnspod,阿里云不支持eu.org
 
 # 使用方法
 
 ```
 docker run -d \
   --name="DDCF" \
-  -e ZONE="example.com" \
-  -e DNSRECORD="sub.example.com" \
-  -e CLOUDFLARE_AUTH_KEY="dhsaihdiuah" \
+  -e TOKEN="123456,123456789abcde" \
+  -e DOMAIN_ID="123456" \
+  -e SUB_DOMAIN="sub" \
+  -e MAIN_DOMAIN="example.com"
   -e HOURS="12" \
   --restart unless-stopped \
   ghcr.io/styxiik/ddcf:latest
 ```
 
-*自行替换以下参数
+*TOKEN:DNSPOD的token,格式为"id,key",可在dnspod右上角头像-API密钥-DNSPOD TOKEN生成，注意不是腾讯云api密钥
 
-*ZONE是cloudflare托管域名的主域名
+*DOMAIN_ID：可在已挂靠dnspod的域名-域名设置获得domain id
 
-*DNSRECORD是需要修改dns的二级域名
+*SUB_DOMAIN:如需要解析ddns的域名为sub.example.com,此处填入sub
 
-*CLOUDFLARE_AUTH_KEY，cloudflare token
+*MAIN_DOMAIN:如需要解析ddns的域名为sub.example.com,此处填入example.com
 
 *HOURS,自动更新ip时间间隔,单位h
 

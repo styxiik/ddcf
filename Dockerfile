@@ -1,10 +1,11 @@
 FROM alpine:latest
 COPY *.sh /
-ENV ZONE $ZONE
-ENV DNSRECORD $DNSRECORD
-ENV CLOUDFLARE_AUTH_KEY $CLOUDFLARE_AUTH_KEY
+ENV TOKEN $TOKEN
+ENV DOMAIN_ID $DOMAIN_ID
+ENV SUB_DOMAIN $SUB_DOMAIN
+ENV MAIN_DOMAIN $MAIN_DOMAIN
 ENV HOURS $HOURS
-RUN apk add --no-cache wget jq curl tar bash gzip bind-tools \
+RUN apk add --no-cache wget jq grep curl tar gzip bind-tools \
  && rm -rf /var/cache/apk/* \
  && touch run.log && chmod 777 run.log \
  && newarch=$(arch | sed s/aarch64/arm64/ | sed s/armv8/arm64/ | sed s/x86_64/amd64/) \
@@ -13,4 +14,4 @@ RUN apk add --no-cache wget jq curl tar bash gzip bind-tools \
  && gzip -d CloudflareST*.tar.gz && tar -vxf CloudflareST*.tar && rm CloudflareST*.tar \
  && chmod +x /CloudflareST /run.sh /startup.sh
 
-CMD /startup.sh $ZONE $DNSRECORD $CLOUDFLARE_AUTH_KEY $HOURS
+CMD /startup.sh $TOKEN $DOMAIN_ID $SUB_DOMAIN $MAIN_DOMAIN $HOURS
