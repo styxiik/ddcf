@@ -16,7 +16,7 @@ if [ "${target_ip} = "" "];then
    exit
 else
    echo "find a target IP $target_ip"
-if && \
+fi && \
 
 NOW_IP=`dig ${DOMAIN} @114.114.114.114 | awk -F "[ ]+" '/IN/{print $1}' | awk 'NR==2 {print $5}'` && \
 echo "Now ip of ${DOMAIN} is ---${NOW_IP}---" && \
