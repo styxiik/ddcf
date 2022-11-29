@@ -68,8 +68,17 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           # tags: ${{ steps.meta.outputs.tags }}
+          
       - name: delete-untagged-action
         uses: camargo/delete-untagged-action@v1
         with:
           github-token: ${{ secrets.REPO_TOKEN }}
           personal-account: true
+          
+      - name: Delete workflow runs
+        uses: Mattraks/delete-workflow-runs@main
+        with:
+          retain_days: 1
+          keep_minimum_runs: 1
+          token: ${{ secrets.REPO_TOKEN }}
+          repository: ${{ github.repository }}
