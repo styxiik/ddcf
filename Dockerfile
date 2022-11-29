@@ -1,5 +1,6 @@
 FROM alpine:latest
-COPY *.sh /
+WORKDIR /root
+COPY *.sh /root
 ENV TOKEN $TOKEN
 ENV DOMAIN_ID $DOMAIN_ID
 ENV SUB_DOMAIN $SUB_DOMAIN
@@ -12,6 +13,6 @@ RUN apk add --no-cache wget jq grep curl tar gzip bind-tools \
  && latest=$(curl -sSL "https://api.github.com/repos/XIU2/CloudflareSpeedTest/releases/latest" | grep "tag_name" | head -n 1 | cut -d : -f2 | sed 's/[ \"v,]//g') \
  && wget -O CloudflareST.tar.gz https://github.com/XIU2/CloudflareSpeedTest/releases/download/v$latest/CloudflareST_linux_$newarch.tar.gz \
  && gzip -d CloudflareST*.tar.gz && tar -vxf CloudflareST*.tar && rm CloudflareST*.tar \
- && chmod +x /CloudflareST /run.sh /startup.sh
+ && chmod +x CloudflareST run.sh startup.sh
 
-CMD /startup.sh $TOKEN $DOMAIN_ID $SUB_DOMAIN $MAIN_DOMAIN $HOURS
+CMD startup.sh $TOKEN $DOMAIN_ID $SUB_DOMAIN $MAIN_DOMAIN $HOURS
