@@ -19,7 +19,7 @@ docker run -d \
   -e MAIN_DOMAIN="example.com" \
   -e HOURS="12" \
   --restart unless-stopped \
-  ghcr.io/styxiik/ddcf:latest
+  styxiik/ddcf:latest
 ```
 
 *TOKEN:DNSPOD的token,格式为"id,key",可在dnspod右上角头像-API密钥-DNSPOD TOKEN生成，注意不是腾讯云api密钥
