@@ -16,7 +16,7 @@ docker run -d \
   -e TOKEN="123456,123456789abcde" \
   -e DOMAIN_ID="123456" \
   -e SUB_DOMAIN="sub" \
-  -e MAIN_DOMAIN="example.com"
+  -e MAIN_DOMAIN="example.com" \
   -e HOURS="12" \
   --restart unless-stopped \
   ghcr.io/styxiik/ddcf:latest
