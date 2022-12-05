@@ -36,7 +36,9 @@ docker run -d \
 
 *默认丢弃延迟超出8-200ms上下限的结果，丢弃速度低于5mb/s的结果，不支持ipv6
 
-*需要避免docker走代理，防止出错,一般代理软件都有不代理ip段的设置
+*如运行几天后出现 curl: (7) Failed to connect to dnsapi.cn port 443 after 4 ms: Couldn't connect to server，请重启docker(不是重启容器)
+
+*需要避免容器的bridge ip走代理，防止出错,一般代理软件都有不代理ip段的设置。不可设置经代理软件走direct模式，可能会全部ip延迟低于8ms，特别是clash。
 
 *建议docker bridge的ip段不走代理，或者可以在部署前创建专属网段
 
