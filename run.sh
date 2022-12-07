@@ -5,8 +5,13 @@ DOMAIN_ID=$2
 SUB_DOMAIN=$3
 MAIN_DOMAIN=$4
 DOMAIN=${SUB_DOMAIN}.${MAIN_DOMAIN}
-RECORD_ID=`curl -X POST https://dnsapi.cn/Record.List -d 'login_token='"${TOKEN}"'&format=json&domain_id='"${DOMAIN_ID}"'&sub_domain='"${SUB_DOMAIN}"'&offset=0&length=3' | jq -r '.records' | grep -E -o '[0-9]{5,15}'` && \
-
+RECORD_ID=`curl -X POST https://dnsapi.cn/Record.List -d 'login_token='"${TOKEN}"'&format=json&domain_id='"${DOMAIN_ID}"'&sub_domain='"${SUB_DOMAIN}"'&offset=0&length=3' | jq -r '.records' | grep -E -o '[0-9]{5,15}'`
+if [ $? -ne 0 ]; then
+    echo "docker can't connect to internet, check your iptables or restart the docker program(not only this container) especially when you had restart other proxy process"
+    exit
+else
+    echo "RECORD_ID is $RECORD_ID"
+fi && \
 rm -f /root/result.csv && \
 /root/CloudflareST -tl 200 -tll 8 -sl 5 -p 1 -f /root/ip.txt && \
 target_ip=`grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}" /root/result.csv| head -n 1` && \
